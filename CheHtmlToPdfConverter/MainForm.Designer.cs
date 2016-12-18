@@ -62,17 +62,29 @@
             this.OpenSelectedPdfFilesAfterConvertButton = new System.Windows.Forms.Button();
             this.ConvertUrlsListButton = new System.Windows.Forms.Button();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
+            this.GetImmediatelyTitleFromUrlСheckBox = new System.Windows.Forms.CheckBox();
             this.SaveStatusRichTextBoxButton = new System.Windows.Forms.Button();
             this.ClearStatusRichTextBoxButton = new System.Windows.Forms.Button();
-            this.GetImmediatelyTitleFromUrlСheckBox = new System.Windows.Forms.CheckBox();
+            this.UseOtherProgramToOpenPdfCheckBox = new System.Windows.Forms.CheckBox();
+            this.OtherProgramToOpenPdfPathTextBox = new System.Windows.Forms.TextBox();
+            this.ChangeOtherProgramToOpenPdfPathButton = new System.Windows.Forms.Button();
+            this.ClearOtherProgramToOpenPdfPathButton = new System.Windows.Forms.Button();
+            this.groupBox2 = new System.Windows.Forms.GroupBox();
+            this.NumerateOutputPdfFileNamesCheckBox = new System.Windows.Forms.CheckBox();
+            this.AddUrlToFooterCheckBox = new System.Windows.Forms.CheckBox();
+            this.AddTitleToHeaderCheckBox = new System.Windows.Forms.CheckBox();
+            this.label5 = new System.Windows.Forms.Label();
+            this.ResponseTimeoutTextBox = new System.Windows.Forms.TextBox();
+            this.ClearResponseTimeoutTextBoxButton = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.UrlsToConvertDataGridView)).BeginInit();
             this.UrlsListGroupBox.SuspendLayout();
             this.groupBox1.SuspendLayout();
+            this.groupBox2.SuspendLayout();
             this.SuspendLayout();
             // 
             // ConvertButton
             // 
-            this.ConvertButton.Location = new System.Drawing.Point(294, 167);
+            this.ConvertButton.Location = new System.Drawing.Point(673, 165);
             this.ConvertButton.Name = "ConvertButton";
             this.ConvertButton.Size = new System.Drawing.Size(104, 23);
             this.ConvertButton.TabIndex = 0;
@@ -84,7 +96,7 @@
             // 
             this.OutputFileTextBox.Location = new System.Drawing.Point(244, 39);
             this.OutputFileTextBox.Name = "OutputFileTextBox";
-            this.OutputFileTextBox.Size = new System.Drawing.Size(154, 20);
+            this.OutputFileTextBox.Size = new System.Drawing.Size(533, 20);
             this.OutputFileTextBox.TabIndex = 2;
             this.OutputFileTextBox.DragDrop += new System.Windows.Forms.DragEventHandler(this.OutputFileTextBox_DragDrop);
             this.OutputFileTextBox.DragEnter += new System.Windows.Forms.DragEventHandler(this.OutputFileTextBox_DragEnter);
@@ -95,7 +107,7 @@
             this.ExeFileTextBox.Location = new System.Drawing.Point(244, 66);
             this.ExeFileTextBox.Name = "ExeFileTextBox";
             this.ExeFileTextBox.ReadOnly = true;
-            this.ExeFileTextBox.Size = new System.Drawing.Size(154, 20);
+            this.ExeFileTextBox.Size = new System.Drawing.Size(533, 20);
             this.ExeFileTextBox.TabIndex = 3;
             this.ExeFileTextBox.Text = "C:\\Program Files\\wkhtmltopdf\\bin\\wkhtmltopdf.exe";
             this.ExeFileTextBox.DragDrop += new System.Windows.Forms.DragEventHandler(this.ExeFileTextBox_DragDrop);
@@ -130,9 +142,9 @@
             // 
             // ChangeOutputFileButton
             // 
-            this.ChangeOutputFileButton.Location = new System.Drawing.Point(444, 37);
+            this.ChangeOutputFileButton.Location = new System.Drawing.Point(823, 37);
             this.ChangeOutputFileButton.Name = "ChangeOutputFileButton";
-            this.ChangeOutputFileButton.Size = new System.Drawing.Size(63, 23);
+            this.ChangeOutputFileButton.Size = new System.Drawing.Size(70, 23);
             this.ChangeOutputFileButton.TabIndex = 7;
             this.ChangeOutputFileButton.Text = "Выбрать";
             this.ChangeOutputFileButton.UseVisualStyleBackColor = true;
@@ -140,9 +152,9 @@
             // 
             // ChangeExeFileButton
             // 
-            this.ChangeExeFileButton.Location = new System.Drawing.Point(444, 64);
+            this.ChangeExeFileButton.Location = new System.Drawing.Point(823, 64);
             this.ChangeExeFileButton.Name = "ChangeExeFileButton";
-            this.ChangeExeFileButton.Size = new System.Drawing.Size(63, 23);
+            this.ChangeExeFileButton.Size = new System.Drawing.Size(70, 23);
             this.ChangeExeFileButton.TabIndex = 8;
             this.ChangeExeFileButton.Text = "Выбрать";
             this.ChangeExeFileButton.UseVisualStyleBackColor = true;
@@ -150,7 +162,7 @@
             // 
             // ClearOutputFileButton
             // 
-            this.ClearOutputFileButton.Location = new System.Drawing.Point(404, 37);
+            this.ClearOutputFileButton.Location = new System.Drawing.Point(783, 37);
             this.ClearOutputFileButton.Name = "ClearOutputFileButton";
             this.ClearOutputFileButton.Size = new System.Drawing.Size(34, 23);
             this.ClearOutputFileButton.TabIndex = 9;
@@ -160,7 +172,7 @@
             // 
             // ClearExeFileButton
             // 
-            this.ClearExeFileButton.Location = new System.Drawing.Point(404, 64);
+            this.ClearExeFileButton.Location = new System.Drawing.Point(783, 64);
             this.ClearExeFileButton.Name = "ClearExeFileButton";
             this.ClearExeFileButton.Size = new System.Drawing.Size(34, 23);
             this.ClearExeFileButton.TabIndex = 10;
@@ -170,7 +182,7 @@
             // 
             // CopyFromClipboardButton
             // 
-            this.CopyFromClipboardButton.Location = new System.Drawing.Point(483, 10);
+            this.CopyFromClipboardButton.Location = new System.Drawing.Point(869, 10);
             this.CopyFromClipboardButton.Name = "CopyFromClipboardButton";
             this.CopyFromClipboardButton.Size = new System.Drawing.Size(24, 23);
             this.CopyFromClipboardButton.TabIndex = 11;
@@ -182,14 +194,14 @@
             // 
             this.StatusRichTextBox.Location = new System.Drawing.Point(13, 92);
             this.StatusRichTextBox.Name = "StatusRichTextBox";
-            this.StatusRichTextBox.Size = new System.Drawing.Size(385, 69);
+            this.StatusRichTextBox.Size = new System.Drawing.Size(764, 69);
             this.StatusRichTextBox.TabIndex = 12;
             this.StatusRichTextBox.Text = "";
             // 
             // label4
             // 
             this.label4.AutoSize = true;
-            this.label4.Location = new System.Drawing.Point(411, 116);
+            this.label4.Location = new System.Drawing.Point(797, 116);
             this.label4.Name = "label4";
             this.label4.Size = new System.Drawing.Size(93, 13);
             this.label4.TabIndex = 13;
@@ -197,7 +209,7 @@
             // 
             // CopyHtmlFromClipboardButton
             // 
-            this.CopyHtmlFromClipboardButton.Location = new System.Drawing.Point(403, 132);
+            this.CopyHtmlFromClipboardButton.Location = new System.Drawing.Point(783, 132);
             this.CopyHtmlFromClipboardButton.Name = "CopyHtmlFromClipboardButton";
             this.CopyHtmlFromClipboardButton.Size = new System.Drawing.Size(34, 23);
             this.CopyHtmlFromClipboardButton.TabIndex = 14;
@@ -207,9 +219,9 @@
             // 
             // ChangeHtmlFileButton
             // 
-            this.ChangeHtmlFileButton.Location = new System.Drawing.Point(443, 132);
+            this.ChangeHtmlFileButton.Location = new System.Drawing.Point(823, 132);
             this.ChangeHtmlFileButton.Name = "ChangeHtmlFileButton";
-            this.ChangeHtmlFileButton.Size = new System.Drawing.Size(64, 23);
+            this.ChangeHtmlFileButton.Size = new System.Drawing.Size(70, 23);
             this.ChangeHtmlFileButton.TabIndex = 15;
             this.ChangeHtmlFileButton.Text = "Выбрать";
             this.ChangeHtmlFileButton.UseVisualStyleBackColor = true;
@@ -223,15 +235,15 @@
             "ASCII",
             "Unicode",
             "1251"});
-            this.HtmlFileEncodingComboBox.Location = new System.Drawing.Point(404, 167);
+            this.HtmlFileEncodingComboBox.Location = new System.Drawing.Point(783, 167);
             this.HtmlFileEncodingComboBox.Name = "HtmlFileEncodingComboBox";
-            this.HtmlFileEncodingComboBox.Size = new System.Drawing.Size(103, 21);
+            this.HtmlFileEncodingComboBox.Size = new System.Drawing.Size(110, 21);
             this.HtmlFileEncodingComboBox.TabIndex = 16;
             // 
             // HtmlFromFileCheckBox
             // 
             this.HtmlFromFileCheckBox.AutoSize = true;
-            this.HtmlFromFileCheckBox.Location = new System.Drawing.Point(404, 93);
+            this.HtmlFromFileCheckBox.Location = new System.Drawing.Point(783, 96);
             this.HtmlFromFileCheckBox.Name = "HtmlFromFileCheckBox";
             this.HtmlFromFileCheckBox.Size = new System.Drawing.Size(110, 17);
             this.HtmlFromFileCheckBox.TabIndex = 17;
@@ -243,7 +255,7 @@
             // 
             this.HtmlPageTextBox.Location = new System.Drawing.Point(244, 12);
             this.HtmlPageTextBox.Name = "HtmlPageTextBox";
-            this.HtmlPageTextBox.Size = new System.Drawing.Size(233, 20);
+            this.HtmlPageTextBox.Size = new System.Drawing.Size(619, 20);
             this.HtmlPageTextBox.TabIndex = 1;
             // 
             // DefaultOutputPathTextBox
@@ -252,16 +264,16 @@
             this.DefaultOutputPathTextBox.Location = new System.Drawing.Point(6, 42);
             this.DefaultOutputPathTextBox.Name = "DefaultOutputPathTextBox";
             this.DefaultOutputPathTextBox.ReadOnly = true;
-            this.DefaultOutputPathTextBox.Size = new System.Drawing.Size(304, 20);
+            this.DefaultOutputPathTextBox.Size = new System.Drawing.Size(687, 20);
             this.DefaultOutputPathTextBox.TabIndex = 18;
             this.DefaultOutputPathTextBox.DragDrop += new System.Windows.Forms.DragEventHandler(this.DefaultOutputPathTextBox_DragDrop);
             this.DefaultOutputPathTextBox.DragEnter += new System.Windows.Forms.DragEventHandler(this.DefaultOutputPathTextBox_DragEnter);
             // 
             // ConvertImmediatelyButton
             // 
-            this.ConvertImmediatelyButton.Location = new System.Drawing.Point(385, 40);
+            this.ConvertImmediatelyButton.Location = new System.Drawing.Point(768, 39);
             this.ConvertImmediatelyButton.Name = "ConvertImmediatelyButton";
-            this.ConvertImmediatelyButton.Size = new System.Drawing.Size(103, 23);
+            this.ConvertImmediatelyButton.Size = new System.Drawing.Size(101, 23);
             this.ConvertImmediatelyButton.TabIndex = 19;
             this.ConvertImmediatelyButton.Text = "Конвертировать";
             this.ConvertImmediatelyButton.UseVisualStyleBackColor = true;
@@ -269,7 +281,7 @@
             // 
             // ChangeDefaultOutputPathButton
             // 
-            this.ChangeDefaultOutputPathButton.Location = new System.Drawing.Point(316, 40);
+            this.ChangeDefaultOutputPathButton.Location = new System.Drawing.Point(699, 39);
             this.ChangeDefaultOutputPathButton.Name = "ChangeDefaultOutputPathButton";
             this.ChangeDefaultOutputPathButton.Size = new System.Drawing.Size(63, 23);
             this.ChangeDefaultOutputPathButton.TabIndex = 20;
@@ -299,7 +311,7 @@
             this.UrlsToConvertDataGridView.Location = new System.Drawing.Point(6, 19);
             this.UrlsToConvertDataGridView.Name = "UrlsToConvertDataGridView";
             this.UrlsToConvertDataGridView.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
-            this.UrlsToConvertDataGridView.Size = new System.Drawing.Size(374, 163);
+            this.UrlsToConvertDataGridView.Size = new System.Drawing.Size(374, 210);
             this.UrlsToConvertDataGridView.TabIndex = 22;
             this.UrlsToConvertDataGridView.DragDrop += new System.Windows.Forms.DragEventHandler(this.UrlsToConvertDataGridView_DragDrop);
             this.UrlsToConvertDataGridView.DragEnter += new System.Windows.Forms.DragEventHandler(this.UrlsToConvertDataGridView_DragEnter);
@@ -326,9 +338,8 @@
             // 
             // UrlsListGroupBox
             // 
+            this.UrlsListGroupBox.Controls.Add(this.groupBox2);
             this.UrlsListGroupBox.Controls.Add(this.ConvertAllCheckBox);
-            this.UrlsListGroupBox.Controls.Add(this.GetTitleFromFileUrlsСheckBox);
-            this.UrlsListGroupBox.Controls.Add(this.GetTitleFromUrlСheckBox);
             this.UrlsListGroupBox.Controls.Add(this.NotOpenSelectedPdfFilesAfterConvertButton);
             this.UrlsListGroupBox.Controls.Add(this.OpenSelectedPdfFilesAfterConvertButton);
             this.UrlsListGroupBox.Controls.Add(this.ConvertUrlsListButton);
@@ -337,7 +348,7 @@
             this.UrlsListGroupBox.Controls.Add(this.AddRawButton);
             this.UrlsListGroupBox.Location = new System.Drawing.Point(15, 196);
             this.UrlsListGroupBox.Name = "UrlsListGroupBox";
-            this.UrlsListGroupBox.Size = new System.Drawing.Size(495, 235);
+            this.UrlsListGroupBox.Size = new System.Drawing.Size(875, 235);
             this.UrlsListGroupBox.TabIndex = 27;
             this.UrlsListGroupBox.TabStop = false;
             this.UrlsListGroupBox.Text = "Список адресов для конвертирования";
@@ -347,7 +358,7 @@
             this.ConvertAllCheckBox.AutoSize = true;
             this.ConvertAllCheckBox.Checked = true;
             this.ConvertAllCheckBox.CheckState = System.Windows.Forms.CheckState.Checked;
-            this.ConvertAllCheckBox.Location = new System.Drawing.Point(399, 136);
+            this.ConvertAllCheckBox.Location = new System.Drawing.Point(400, 183);
             this.ConvertAllCheckBox.Name = "ConvertAllCheckBox";
             this.ConvertAllCheckBox.Size = new System.Drawing.Size(73, 17);
             this.ConvertAllCheckBox.TabIndex = 33;
@@ -359,21 +370,21 @@
             this.GetTitleFromFileUrlsСheckBox.AutoSize = true;
             this.GetTitleFromFileUrlsСheckBox.Checked = true;
             this.GetTitleFromFileUrlsСheckBox.CheckState = System.Windows.Forms.CheckState.Checked;
-            this.GetTitleFromFileUrlsСheckBox.Location = new System.Drawing.Point(6, 212);
+            this.GetTitleFromFileUrlsСheckBox.Location = new System.Drawing.Point(7, 66);
             this.GetTitleFromFileUrlsСheckBox.Name = "GetTitleFromFileUrlsСheckBox";
-            this.GetTitleFromFileUrlsСheckBox.Size = new System.Drawing.Size(459, 17);
+            this.GetTitleFromFileUrlsСheckBox.Size = new System.Drawing.Size(338, 17);
             this.GetTitleFromFileUrlsСheckBox.TabIndex = 32;
-            this.GetTitleFromFileUrlsСheckBox.Text = "Получить имя выходного файла из заголовка страницы при добавлении url из файла";
+            this.GetTitleFromFileUrlsСheckBox.Text = "Получить имя выходного файла из заголовка страницы (add)";
             this.GetTitleFromFileUrlsСheckBox.UseVisualStyleBackColor = true;
             // 
             // GetTitleFromUrlСheckBox
             // 
             this.GetTitleFromUrlСheckBox.AutoSize = true;
-            this.GetTitleFromUrlСheckBox.Location = new System.Drawing.Point(6, 188);
+            this.GetTitleFromUrlСheckBox.Location = new System.Drawing.Point(7, 43);
             this.GetTitleFromUrlСheckBox.Name = "GetTitleFromUrlСheckBox";
-            this.GetTitleFromUrlСheckBox.Size = new System.Drawing.Size(424, 17);
+            this.GetTitleFromUrlСheckBox.Size = new System.Drawing.Size(356, 17);
             this.GetTitleFromUrlСheckBox.TabIndex = 31;
-            this.GetTitleFromUrlСheckBox.Text = "Получить имя выходного файла из заголовка страницы при конвертировании";
+            this.GetTitleFromUrlСheckBox.Text = "Получить имя выходного файла из заголовка страницы (convert)";
             this.GetTitleFromUrlСheckBox.UseVisualStyleBackColor = true;
             // 
             // NotOpenSelectedPdfFilesAfterConvertButton
@@ -398,7 +409,7 @@
             // 
             // ConvertUrlsListButton
             // 
-            this.ConvertUrlsListButton.Location = new System.Drawing.Point(386, 159);
+            this.ConvertUrlsListButton.Location = new System.Drawing.Point(386, 206);
             this.ConvertUrlsListButton.Name = "ConvertUrlsListButton";
             this.ConvertUrlsListButton.Size = new System.Drawing.Size(103, 23);
             this.ConvertUrlsListButton.TabIndex = 28;
@@ -415,10 +426,22 @@
             this.groupBox1.Controls.Add(this.ChangeDefaultOutputPathButton);
             this.groupBox1.Location = new System.Drawing.Point(15, 437);
             this.groupBox1.Name = "groupBox1";
-            this.groupBox1.Size = new System.Drawing.Size(495, 79);
+            this.groupBox1.Size = new System.Drawing.Size(875, 79);
             this.groupBox1.TabIndex = 28;
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "Мгновенное конвертирование из буфера обмена";
+            // 
+            // GetImmediatelyTitleFromUrlСheckBox
+            // 
+            this.GetImmediatelyTitleFromUrlСheckBox.AutoSize = true;
+            this.GetImmediatelyTitleFromUrlСheckBox.Checked = true;
+            this.GetImmediatelyTitleFromUrlСheckBox.CheckState = System.Windows.Forms.CheckState.Checked;
+            this.GetImmediatelyTitleFromUrlСheckBox.Location = new System.Drawing.Point(213, 19);
+            this.GetImmediatelyTitleFromUrlСheckBox.Name = "GetImmediatelyTitleFromUrlСheckBox";
+            this.GetImmediatelyTitleFromUrlСheckBox.Size = new System.Drawing.Size(219, 17);
+            this.GetImmediatelyTitleFromUrlСheckBox.TabIndex = 22;
+            this.GetImmediatelyTitleFromUrlСheckBox.Text = "Получить имя из заголовка страницы";
+            this.GetImmediatelyTitleFromUrlСheckBox.UseVisualStyleBackColor = true;
             // 
             // SaveStatusRichTextBoxButton
             // 
@@ -440,23 +463,137 @@
             this.ClearStatusRichTextBoxButton.UseVisualStyleBackColor = true;
             this.ClearStatusRichTextBoxButton.Click += new System.EventHandler(this.ClearStatusRichTextBoxButton_Click);
             // 
-            // GetImmediatelyTitleFromUrlСheckBox
+            // UseOtherProgramToOpenPdfCheckBox
             // 
-            this.GetImmediatelyTitleFromUrlСheckBox.AutoSize = true;
-            this.GetImmediatelyTitleFromUrlСheckBox.Checked = true;
-            this.GetImmediatelyTitleFromUrlСheckBox.CheckState = System.Windows.Forms.CheckState.Checked;
-            this.GetImmediatelyTitleFromUrlСheckBox.Location = new System.Drawing.Point(269, 19);
-            this.GetImmediatelyTitleFromUrlСheckBox.Name = "GetImmediatelyTitleFromUrlСheckBox";
-            this.GetImmediatelyTitleFromUrlСheckBox.Size = new System.Drawing.Size(219, 17);
-            this.GetImmediatelyTitleFromUrlСheckBox.TabIndex = 22;
-            this.GetImmediatelyTitleFromUrlСheckBox.Text = "Получить имя из заголовка страницы";
-            this.GetImmediatelyTitleFromUrlСheckBox.UseVisualStyleBackColor = true;
+            this.UseOtherProgramToOpenPdfCheckBox.AutoSize = true;
+            this.UseOtherProgramToOpenPdfCheckBox.Enabled = false;
+            this.UseOtherProgramToOpenPdfCheckBox.Location = new System.Drawing.Point(15, 522);
+            this.UseOtherProgramToOpenPdfCheckBox.Name = "UseOtherProgramToOpenPdfCheckBox";
+            this.UseOtherProgramToOpenPdfCheckBox.Size = new System.Drawing.Size(352, 17);
+            this.UseOtherProgramToOpenPdfCheckBox.TabIndex = 31;
+            this.UseOtherProgramToOpenPdfCheckBox.Text = "Использовать стороннюю программу для открытия pdf-файлов:";
+            this.UseOtherProgramToOpenPdfCheckBox.UseVisualStyleBackColor = true;
+            this.UseOtherProgramToOpenPdfCheckBox.CheckedChanged += new System.EventHandler(this.UseOtherProgramToOpenPdfCheckBox_CheckedChanged);
+            // 
+            // OtherProgramToOpenPdfPathTextBox
+            // 
+            this.OtherProgramToOpenPdfPathTextBox.AllowDrop = true;
+            this.OtherProgramToOpenPdfPathTextBox.Location = new System.Drawing.Point(15, 541);
+            this.OtherProgramToOpenPdfPathTextBox.Name = "OtherProgramToOpenPdfPathTextBox";
+            this.OtherProgramToOpenPdfPathTextBox.ReadOnly = true;
+            this.OtherProgramToOpenPdfPathTextBox.Size = new System.Drawing.Size(762, 20);
+            this.OtherProgramToOpenPdfPathTextBox.TabIndex = 32;
+            this.OtherProgramToOpenPdfPathTextBox.DragDrop += new System.Windows.Forms.DragEventHandler(this.OtherProgramToOpenPdfPathTextBox_DragDrop);
+            this.OtherProgramToOpenPdfPathTextBox.DragEnter += new System.Windows.Forms.DragEventHandler(this.OtherProgramToOpenPdfPathTextBox_DragEnter);
+            // 
+            // ChangeOtherProgramToOpenPdfPathButton
+            // 
+            this.ChangeOtherProgramToOpenPdfPathButton.Location = new System.Drawing.Point(823, 538);
+            this.ChangeOtherProgramToOpenPdfPathButton.Name = "ChangeOtherProgramToOpenPdfPathButton";
+            this.ChangeOtherProgramToOpenPdfPathButton.Size = new System.Drawing.Size(70, 23);
+            this.ChangeOtherProgramToOpenPdfPathButton.TabIndex = 33;
+            this.ChangeOtherProgramToOpenPdfPathButton.Text = "Выбрать";
+            this.ChangeOtherProgramToOpenPdfPathButton.UseVisualStyleBackColor = true;
+            this.ChangeOtherProgramToOpenPdfPathButton.Click += new System.EventHandler(this.ChangeOtherProgramToOpenPdfPathButton_Click);
+            // 
+            // ClearOtherProgramToOpenPdfPathButton
+            // 
+            this.ClearOtherProgramToOpenPdfPathButton.Location = new System.Drawing.Point(783, 538);
+            this.ClearOtherProgramToOpenPdfPathButton.Name = "ClearOtherProgramToOpenPdfPathButton";
+            this.ClearOtherProgramToOpenPdfPathButton.Size = new System.Drawing.Size(34, 23);
+            this.ClearOtherProgramToOpenPdfPathButton.TabIndex = 34;
+            this.ClearOtherProgramToOpenPdfPathButton.Text = "X";
+            this.ClearOtherProgramToOpenPdfPathButton.UseVisualStyleBackColor = true;
+            this.ClearOtherProgramToOpenPdfPathButton.Click += new System.EventHandler(this.ClearOtherProgramToOpenPdfPathButton_Click);
+            // 
+            // groupBox2
+            // 
+            this.groupBox2.Controls.Add(this.ClearResponseTimeoutTextBoxButton);
+            this.groupBox2.Controls.Add(this.ResponseTimeoutTextBox);
+            this.groupBox2.Controls.Add(this.label5);
+            this.groupBox2.Controls.Add(this.AddTitleToHeaderCheckBox);
+            this.groupBox2.Controls.Add(this.AddUrlToFooterCheckBox);
+            this.groupBox2.Controls.Add(this.NumerateOutputPdfFileNamesCheckBox);
+            this.groupBox2.Controls.Add(this.GetTitleFromUrlСheckBox);
+            this.groupBox2.Controls.Add(this.GetTitleFromFileUrlsСheckBox);
+            this.groupBox2.Location = new System.Drawing.Point(495, 19);
+            this.groupBox2.Name = "groupBox2";
+            this.groupBox2.Size = new System.Drawing.Size(374, 210);
+            this.groupBox2.TabIndex = 34;
+            this.groupBox2.TabStop = false;
+            this.groupBox2.Text = "Параметры конвертирования списка даресов";
+            // 
+            // NumerateOutputPdfFileNamesCheckBox
+            // 
+            this.NumerateOutputPdfFileNamesCheckBox.AutoSize = true;
+            this.NumerateOutputPdfFileNamesCheckBox.Location = new System.Drawing.Point(7, 20);
+            this.NumerateOutputPdfFileNamesCheckBox.Name = "NumerateOutputPdfFileNamesCheckBox";
+            this.NumerateOutputPdfFileNamesCheckBox.Size = new System.Drawing.Size(217, 17);
+            this.NumerateOutputPdfFileNamesCheckBox.TabIndex = 0;
+            this.NumerateOutputPdfFileNamesCheckBox.Text = "Нумеровать имена выходных файлов";
+            this.NumerateOutputPdfFileNamesCheckBox.UseVisualStyleBackColor = true;
+            // 
+            // AddUrlToFooterCheckBox
+            // 
+            this.AddUrlToFooterCheckBox.AutoSize = true;
+            this.AddUrlToFooterCheckBox.Checked = true;
+            this.AddUrlToFooterCheckBox.CheckState = System.Windows.Forms.CheckState.Checked;
+            this.AddUrlToFooterCheckBox.Location = new System.Drawing.Point(6, 164);
+            this.AddUrlToFooterCheckBox.Name = "AddUrlToFooterCheckBox";
+            this.AddUrlToFooterCheckBox.Size = new System.Drawing.Size(164, 17);
+            this.AddUrlToFooterCheckBox.TabIndex = 33;
+            this.AddUrlToFooterCheckBox.Text = "Добавить источник в footer";
+            this.AddUrlToFooterCheckBox.UseVisualStyleBackColor = true;
+            // 
+            // AddTitleToHeaderCheckBox
+            // 
+            this.AddTitleToHeaderCheckBox.AutoSize = true;
+            this.AddTitleToHeaderCheckBox.Checked = true;
+            this.AddTitleToHeaderCheckBox.CheckState = System.Windows.Forms.CheckState.Checked;
+            this.AddTitleToHeaderCheckBox.Location = new System.Drawing.Point(6, 187);
+            this.AddTitleToHeaderCheckBox.Name = "AddTitleToHeaderCheckBox";
+            this.AddTitleToHeaderCheckBox.Size = new System.Drawing.Size(177, 17);
+            this.AddTitleToHeaderCheckBox.TabIndex = 34;
+            this.AddTitleToHeaderCheckBox.Text = "Добавить заголовок в header";
+            this.AddTitleToHeaderCheckBox.UseVisualStyleBackColor = true;
+            // 
+            // label5
+            // 
+            this.label5.AutoSize = true;
+            this.label5.Location = new System.Drawing.Point(7, 87);
+            this.label5.Name = "label5";
+            this.label5.Size = new System.Drawing.Size(237, 13);
+            this.label5.TabIndex = 35;
+            this.label5.Text = "Таймаут при получении заголовка страницы:";
+            // 
+            // ResponseTimeoutTextBox
+            // 
+            this.ResponseTimeoutTextBox.Location = new System.Drawing.Point(245, 84);
+            this.ResponseTimeoutTextBox.Name = "ResponseTimeoutTextBox";
+            this.ResponseTimeoutTextBox.Size = new System.Drawing.Size(83, 20);
+            this.ResponseTimeoutTextBox.TabIndex = 36;
+            this.ResponseTimeoutTextBox.Text = "15000";
+            this.ResponseTimeoutTextBox.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.ResponseTimeoutTextBox_KeyPress);
+            // 
+            // ClearResponseTimeoutTextBoxButton
+            // 
+            this.ClearResponseTimeoutTextBoxButton.Location = new System.Drawing.Point(334, 82);
+            this.ClearResponseTimeoutTextBoxButton.Name = "ClearResponseTimeoutTextBoxButton";
+            this.ClearResponseTimeoutTextBoxButton.Size = new System.Drawing.Size(34, 23);
+            this.ClearResponseTimeoutTextBoxButton.TabIndex = 37;
+            this.ClearResponseTimeoutTextBoxButton.Text = "X";
+            this.ClearResponseTimeoutTextBoxButton.UseVisualStyleBackColor = true;
+            this.ClearResponseTimeoutTextBoxButton.Click += new System.EventHandler(this.ClearResponseTimeoutTextBoxButton_Click);
             // 
             // MainForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(519, 524);
+            this.ClientSize = new System.Drawing.Size(905, 573);
+            this.Controls.Add(this.ClearOtherProgramToOpenPdfPathButton);
+            this.Controls.Add(this.OtherProgramToOpenPdfPathTextBox);
+            this.Controls.Add(this.ChangeOtherProgramToOpenPdfPathButton);
+            this.Controls.Add(this.UseOtherProgramToOpenPdfCheckBox);
             this.Controls.Add(this.ClearStatusRichTextBoxButton);
             this.Controls.Add(this.SaveStatusRichTextBoxButton);
             this.Controls.Add(this.groupBox1);
@@ -490,6 +627,8 @@
             this.UrlsListGroupBox.PerformLayout();
             this.groupBox1.ResumeLayout(false);
             this.groupBox1.PerformLayout();
+            this.groupBox2.ResumeLayout(false);
+            this.groupBox2.PerformLayout();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -533,6 +672,17 @@
         private System.Windows.Forms.CheckBox GetTitleFromFileUrlsСheckBox;
         private System.Windows.Forms.CheckBox ConvertAllCheckBox;
         private System.Windows.Forms.CheckBox GetImmediatelyTitleFromUrlСheckBox;
+        private System.Windows.Forms.CheckBox UseOtherProgramToOpenPdfCheckBox;
+        private System.Windows.Forms.TextBox OtherProgramToOpenPdfPathTextBox;
+        private System.Windows.Forms.Button ChangeOtherProgramToOpenPdfPathButton;
+        private System.Windows.Forms.Button ClearOtherProgramToOpenPdfPathButton;
+        private System.Windows.Forms.GroupBox groupBox2;
+        private System.Windows.Forms.CheckBox NumerateOutputPdfFileNamesCheckBox;
+        private System.Windows.Forms.CheckBox AddUrlToFooterCheckBox;
+        private System.Windows.Forms.CheckBox AddTitleToHeaderCheckBox;
+        private System.Windows.Forms.Button ClearResponseTimeoutTextBoxButton;
+        private System.Windows.Forms.TextBox ResponseTimeoutTextBox;
+        private System.Windows.Forms.Label label5;
     }
 }
 

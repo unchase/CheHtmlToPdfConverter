@@ -57,11 +57,12 @@ namespace CheHtmlToPdfConverter.Helpers
 
 
 
-        public static string GetWebPageTitle(string url)
+        public static string GetWebPageTitle(string url, int timeout)
         {
             try
             {
                 HttpWebRequest request = (HttpWebRequest.Create(url) as HttpWebRequest);
+                request.Timeout = timeout;
                 //request.AutomaticDecompression = DecompressionMethods.GZip | DecompressionMethods.Deflate;
                 HttpWebResponse response = (request.GetResponse() as HttpWebResponse);
                 using (Stream stream = response.GetResponseStream())
@@ -95,7 +96,7 @@ namespace CheHtmlToPdfConverter.Helpers
                     return "";
                 }
             }
-            catch (Exception)
+            catch (Exception ex)
             {
                 return "";
             }

@@ -12,6 +12,7 @@ using System.Text;
 using System.Text.RegularExpressions;
 using System.Threading;
 using System.Threading.Tasks;
+using System.Web;
 using System.Windows.Forms;
 using CheHtmlToPdfConverter.Helpers;
 using Codaxy.WkHtmlToPdf;
@@ -20,11 +21,17 @@ namespace CheHtmlToPdfConverter
 {
     public partial class MainForm : Form
     {
-        public BindingList<UrlToConvert> UrlsToConvert { get; set; } 
+        public BindingList<UrlToConvert> UrlsToConvert { get; set; }
+
+        IniFileHelper.IniFile iniFile = new IniFileHelper.IniFile("config.ini");
 
         public MainForm()
         {
             InitializeComponent();
+
+
+            //Process.Start("c:\\Program Files\\priPrinter\\priPrinter.exe", "e:\\26\\1.pdf");
+
 
             UrlsToConvert = new BindingList<UrlToConvert>();
             UrlsToConvertDataGridView.DataSource = UrlsToConvert;
@@ -32,6 +39,16 @@ namespace CheHtmlToPdfConverter
             HtmlFileEncodingComboBox.SelectedIndex = 0;
             HtmlFromFileCheckBox.Checked = true;
             HtmlFromFileCheckBox.Checked = false;
+            UseOtherProgramToOpenPdfCheckBox.Checked = true;
+            UseOtherProgramToOpenPdfCheckBox.Checked = false;
+
+            if (iniFile.KeyExists("Default", "OtherProgramToOpenPdf"))
+            {
+                OtherProgramToOpenPdfPathTextBox.Text = iniFile.Read("OtherProgramToOpenPdf", "Default");
+            }
+            else
+                OtherProgramToOpenPdfPathTextBox.Text = "";
+
             HtmlFileEncodingComboBox.DropDownStyle = ComboBoxStyle.DropDownList;
 
             DefaultOutputPathTextBox.Text = DefaultFoldersHelper.GetPath(KnownFolder.Downloads);
@@ -113,6 +130,7 @@ namespace CheHtmlToPdfConverter
                     PdfConvert.Environment.WkHtmlToPdfPath = ExeFileTextBox.Text;
                 }
 
+                var pdfDocument = new PdfDocument();
                 if (!immediately)
                 {
                     if (!HtmlFromFileCheckBox.Checked)
@@ -128,27 +146,36 @@ namespace CheHtmlToPdfConverter
                             return;
                         }
 
-                        PdfConvert.ConvertHtmlToPdf(new PdfDocument {Url = HtmlPageTextBox.Text}, new PdfOutput
-                        {
-                            OutputFilePath = outputFileFullPath
-                        });
+                        pdfDocument.Url = HtmlPageTextBox.Text;
+
+
                     }
                     else
                     {
-                        PdfConvert.ConvertHtmlToPdf(new PdfDocument { Url = "-", Html = StatusRichTextBox.Text },
-                        new PdfOutput
-                        {
-                            OutputFilePath = outputFileFullPath
-                        });
+                        pdfDocument.Url = "-";
+                        pdfDocument.Html = StatusRichTextBox.Text;
+
+
                     }
                 }
                 else
                 {
-                    PdfConvert.ConvertHtmlToPdf(new PdfDocument { Url = url }, new PdfOutput
+                    pdfDocument.Url = url;
+                    if (AddUrlToFooterCheckBox.Checked)
                     {
-                        OutputFilePath = outputFileFullPath
-                    });
+                        pdfDocument.FooterCenter = url;
+                    }
+                    if (AddTitleToHeaderCheckBox.Checked)
+                    {
+                        pdfDocument.HeaderLeft = "[title]";
+                    }
+
                 }
+
+                PdfConvert.ConvertHtmlToPdf(pdfDocument, new PdfOutput
+                {
+                    OutputFilePath = outputFileFullPath
+                });
 
                 //PdfConvert.ConvertHtmlToPdf(new PdfDocument 
                 //{ 
@@ -157,20 +184,6 @@ namespace CheHtmlToPdfConverter
                 //    HeaderRight = "[date] [time]",
                 //    FooterCenter = "Page [page] of [topage]"
 
-                //}, new PdfOutput
-                //{
-                //    OutputFilePath = "codaxy_hf.pdf"
-                //});
-                //PdfConvert.ConvertHtmlToPdf(new PdfDocument { Url = "-", Html = "<html><h1>test</h1></html>"}, new PdfOutput
-                //{
-                //    OutputFilePath = "inline.pdf"
-                //});
-                //PdfConvert.ConvertHtmlToPdf(new PdfDocument { Url = "-", Html = "<html><h1>測試</h1></html>" }, new PdfOutput
-                //{
-                //    OutputFilePath = "inline_cht.pdf"
-                //});
-
-                //PdfConvert.ConvertHtmlToPdf("http://tweakers.net", "tweakers.pdf");
 
                 StatusRichTextBox.Text += "\"" + outputFileFullPath + "\" создан.\n";
 
@@ -271,7 +284,11 @@ namespace CheHtmlToPdfConverter
             var url = Clipboard.GetText(TextDataFormat.Text);
             if (GetImmediatelyTitleFromUrlСheckBox.Checked)
             {
-                fileName = ResponseTagHelper.GetWebPageTitle(url);
+                int timeout;
+                if (!int.TryParse(ResponseTimeoutTextBox.Text, out timeout))
+                    timeout = 15000;
+
+                fileName = ResponseTagHelper.GetWebPageTitle(url, timeout);
                 if (fileName == "")
                     fileName = Path.Combine(DefaultOutputPathTextBox.Text,
                         DateTime.Now.ToShortDateString() + "-" + DateTime.Now.Hour + "-" + DateTime.Now.Minute + "-" +
@@ -287,6 +304,14 @@ namespace CheHtmlToPdfConverter
                     DateTime.Now.ToShortDateString() + "-" + DateTime.Now.Hour + "-" + DateTime.Now.Minute + "-" +
                     DateTime.Now.Second + "-" + DateTime.Now.Millisecond + ".pdf");
             }
+
+            var oldFileName = fileName;
+            var findNull = fileName.IndexOf('\0');
+            if (findNull != null && findNull >= 0)
+                fileName = fileName.Remove(findNull);
+
+            if (!string.Equals(fileName, oldFileName))
+                StatusRichTextBox.Text += "Выходное имя файла \"" + oldFileName + "\" изменено на \"" + fileName + "\"\n";
 
             Convert(url, fileName, true,
                 OpenPdfFileCheckBox.Checked);
@@ -319,8 +344,14 @@ namespace CheHtmlToPdfConverter
             if (ConvertAllCheckBox.Checked)
                 UrlsToConvertDataGridView.SelectAll();
 
+            int timeout;
+            if (!int.TryParse(ResponseTimeoutTextBox.Text, out timeout))
+                timeout = 15000;
+
+            var count = 0;
             foreach (DataGridViewRow row in UrlsToConvertDataGridView.SelectedRows)
             {
+                count++;
                 UrlToConvert realDataRow = (UrlToConvert)row.DataBoundItem;
 
                 //^http(s)?://([\w-]+.)+[\w-]+(/[\w- ./?%&=])?$
@@ -340,10 +371,42 @@ namespace CheHtmlToPdfConverter
                 if (GetTitleFromUrlСheckBox.Checked)
                 {
                     StatusRichTextBox.Text += "Идет получение Title по Url...\n";
-                    string title = ResponseTagHelper.GetWebPageTitle(url);
+                    string title = ResponseTagHelper.GetWebPageTitle(url, timeout);
                     if (title != "")
                         fileName = title;
                 }
+
+
+                ///
+                //var t = HttpUtility.UrlDecode(fileName);
+
+
+                
+                //StringBuilder output = new StringBuilder(fileName.Length);
+
+                //for (int i = 0; i < fileName.Length; i++)
+                //{
+                //    if (fileName[i] == '&')
+                //    {
+                //        int startOfEntity = i; // just for easier reading
+                //        int endOfEntity = fileName.IndexOf(';', startOfEntity);
+                //        string entity = fileName.Substring(startOfEntity, endOfEntity - startOfEntity);
+                //        int unicodeNumber = (int)(HttpUtility.HtmlDecode(entity)[0]);
+
+                //        //int code = int.Parse(unicodeNumber.ToString(), System.Globalization.NumberStyles.Number);
+                        
+                //        string unicodeString = ((char)unicodeNumber).ToString();
+
+
+                //        output.Append(unicodeString);
+                //        i = endOfEntity; // continue parsing after the end of the entity
+                //    }
+                //    else
+                //        output.Append(fileName[i]);
+                //}
+                //var tt = output.ToString();
+                ///
+
 
                 fileName = fileName.Replace('/', '_');
                 fileName = fileName.Replace('\\', '_');
@@ -358,6 +421,9 @@ namespace CheHtmlToPdfConverter
 
                 if (!string.Equals(fileName, realDataRow.Name))
                     StatusRichTextBox.Text += "Выходное имя файла \"" + realDataRow.Name + "\" изменено на \"" + fileName + "\"\n";
+
+                if (NumerateOutputPdfFileNamesCheckBox.Checked)
+                    fileName = count + " - " + fileName;
 
                 Convert(url, Path.Combine(DefaultOutputPathTextBox.Text, fileName + ".pdf"),
                     true, realDataRow.Open);
@@ -515,6 +581,10 @@ namespace CheHtmlToPdfConverter
         {
             string[] files = (string[])e.Data.GetData(DataFormats.FileDrop);
 
+            int timeout;
+            if (!int.TryParse(ResponseTimeoutTextBox.Text, out timeout))
+                timeout = 15000;
+
             int counter = 0;
             foreach (string filePath in files)
             {
@@ -533,7 +603,9 @@ namespace CheHtmlToPdfConverter
                         {
                             if (GetTitleFromFileUrlsСheckBox.Checked)
                             {
-                                string title = ResponseTagHelper.GetWebPageTitle(l.Trim());
+                                
+
+                                string title = ResponseTagHelper.GetWebPageTitle(l.Trim(), timeout);
                                 if (title != "")
                                     UrlsToConvert.Add(new UrlToConvert(l.Trim(), title, false));
                                 else
@@ -617,6 +689,69 @@ namespace CheHtmlToPdfConverter
         private void ClearStatusRichTextBoxButton_Click(object sender, EventArgs e)
         {
             StatusRichTextBox.Text = "";
+        }
+
+        private void ChangeOtherProgramToOpenPdfPathButton_Click(object sender, EventArgs e)
+        {
+            OpenFileDialog ofd = new OpenFileDialog();
+            ofd.AddExtension = true;
+            ofd.DefaultExt = "exe";
+            ofd.Filter = "exe файлы (*.exe)|*.exe";
+            ofd.RestoreDirectory = true;
+            ofd.Title = "Выберите расположение программы для открытия pdf-файлов";
+            ofd.ValidateNames = true;
+            ofd.CheckFileExists = true;
+            ofd.Multiselect = false;
+            ofd.SupportMultiDottedExtensions = false;
+            if (ofd.ShowDialog() == DialogResult.OK)
+            {
+                OtherProgramToOpenPdfPathTextBox.Text = ofd.FileName;
+            }
+        }
+
+        private void OtherProgramToOpenPdfPathTextBox_DragDrop(object sender, DragEventArgs e)
+        {
+            string[] files = (string[])e.Data.GetData(DataFormats.FileDrop);
+
+            foreach (string file in files)
+            {
+                OtherProgramToOpenPdfPathTextBox.Text = file;
+            }
+        }
+
+        private void OtherProgramToOpenPdfPathTextBox_DragEnter(object sender, DragEventArgs e)
+        {
+            if (e.Data.GetDataPresent(DataFormats.FileDrop, false) == true)
+            {
+                var path = ((string[])e.Data.GetData(DataFormats.FileDrop, false))[0];
+                if (File.Exists(path))
+                    e.Effect = DragDropEffects.All;
+            }
+        }
+
+        private void ClearOtherProgramToOpenPdfPathButton_Click(object sender, EventArgs e)
+        {
+            OtherProgramToOpenPdfPathTextBox.Text = "";
+        }
+
+        private void UseOtherProgramToOpenPdfCheckBox_CheckedChanged(object sender, EventArgs e)
+        {
+            OtherProgramToOpenPdfPathTextBox.Enabled = UseOtherProgramToOpenPdfCheckBox.Checked;
+            ClearOtherProgramToOpenPdfPathButton.Enabled = UseOtherProgramToOpenPdfCheckBox.Checked;
+            ChangeOtherProgramToOpenPdfPathButton.Enabled = UseOtherProgramToOpenPdfCheckBox.Checked;
+        }
+
+        private void ClearResponseTimeoutTextBoxButton_Click(object sender, EventArgs e)
+        {
+            ResponseTimeoutTextBox.Text = "15000";
+        }
+
+        private void ResponseTimeoutTextBox_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            if (!Char.IsDigit(e.KeyChar) && e.KeyChar != System.Convert.ToChar(8))
+            {
+                e.Handled = true;
+            }
         }
     }
 }
