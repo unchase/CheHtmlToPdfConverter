@@ -100,10 +100,10 @@ namespace CheHtmlToPdfConverter
                 return;
             }
 
-            Convert("", OutputFileTextBox.Text, false, false, true);
+            Convert("", OutputFileTextBox.Text, false, true);
         }
 
-        private void Convert(string url, string outputFileFullPath, bool urlList, bool immediately, bool open)
+        private void Convert(string url, string outputFileFullPath, bool immediately, bool open)
         {
             try
             {
@@ -144,20 +144,10 @@ namespace CheHtmlToPdfConverter
                 }
                 else
                 {
-                    if (urlList)
+                    PdfConvert.ConvertHtmlToPdf(new PdfDocument { Url = url }, new PdfOutput
                     {
-                        PdfConvert.ConvertHtmlToPdf(new PdfDocument { Url = url }, new PdfOutput
-                        {
-                            OutputFilePath = outputFileFullPath
-                        });
-                    }
-                    else
-                    {
-                        PdfConvert.ConvertHtmlToPdf(new PdfDocument { Url = Clipboard.GetText(TextDataFormat.Text) }, new PdfOutput
-                        {
-                            OutputFilePath = outputFileFullPath
-                        });
-                    }
+                        OutputFilePath = outputFileFullPath
+                    });
                 }
 
                 //PdfConvert.ConvertHtmlToPdf(new PdfDocument 
@@ -277,10 +267,28 @@ namespace CheHtmlToPdfConverter
 
             StatusRichTextBox.Text = "";
 
-            Convert("",
-                Path.Combine(DefaultOutputPathTextBox.Text,
+            var fileName = "";
+            var url = Clipboard.GetText(TextDataFormat.Text);
+            if (GetImmediatelyTitleFromUrlСheckBox.Checked)
+            {
+                fileName = ResponseTagHelper.GetWebPageTitle(url);
+                if (fileName == "")
+                    fileName = Path.Combine(DefaultOutputPathTextBox.Text,
+                        DateTime.Now.ToShortDateString() + "-" + DateTime.Now.Hour + "-" + DateTime.Now.Minute + "-" +
+                        DateTime.Now.Second + "-" + DateTime.Now.Millisecond + ".pdf");
+                else
+                {
+                    fileName = Path.Combine(DefaultOutputPathTextBox.Text, fileName + ".pdf");
+                }
+            } 
+            else
+            {
+                fileName = Path.Combine(DefaultOutputPathTextBox.Text,
                     DateTime.Now.ToShortDateString() + "-" + DateTime.Now.Hour + "-" + DateTime.Now.Minute + "-" +
-                    DateTime.Now.Second + "-" + DateTime.Now.Millisecond + ".pdf"), false, true,
+                    DateTime.Now.Second + "-" + DateTime.Now.Millisecond + ".pdf");
+            }
+
+            Convert(url, fileName, true,
                 OpenPdfFileCheckBox.Checked);
         }
 
@@ -351,7 +359,7 @@ namespace CheHtmlToPdfConverter
                 if (!string.Equals(fileName, realDataRow.Name))
                     StatusRichTextBox.Text += "Выходное имя файла \"" + realDataRow.Name + "\" изменено на \"" + fileName + "\"\n";
 
-                Convert(url, Path.Combine(DefaultOutputPathTextBox.Text, fileName + ".pdf"), true,
+                Convert(url, Path.Combine(DefaultOutputPathTextBox.Text, fileName + ".pdf"),
                     true, realDataRow.Open);
             }
         }

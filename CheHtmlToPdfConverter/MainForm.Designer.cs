@@ -55,6 +55,8 @@
             this.AddRawButton = new System.Windows.Forms.Button();
             this.DeleteRawButton = new System.Windows.Forms.Button();
             this.UrlsListGroupBox = new System.Windows.Forms.GroupBox();
+            this.ConvertAllCheckBox = new System.Windows.Forms.CheckBox();
+            this.GetTitleFromFileUrlsСheckBox = new System.Windows.Forms.CheckBox();
             this.GetTitleFromUrlСheckBox = new System.Windows.Forms.CheckBox();
             this.NotOpenSelectedPdfFilesAfterConvertButton = new System.Windows.Forms.Button();
             this.OpenSelectedPdfFilesAfterConvertButton = new System.Windows.Forms.Button();
@@ -62,8 +64,7 @@
             this.groupBox1 = new System.Windows.Forms.GroupBox();
             this.SaveStatusRichTextBoxButton = new System.Windows.Forms.Button();
             this.ClearStatusRichTextBoxButton = new System.Windows.Forms.Button();
-            this.GetTitleFromFileUrlsСheckBox = new System.Windows.Forms.CheckBox();
-            this.ConvertAllCheckBox = new System.Windows.Forms.CheckBox();
+            this.GetImmediatelyTitleFromUrlСheckBox = new System.Windows.Forms.CheckBox();
             ((System.ComponentModel.ISupportInitialize)(this.UrlsToConvertDataGridView)).BeginInit();
             this.UrlsListGroupBox.SuspendLayout();
             this.groupBox1.SuspendLayout();
@@ -341,6 +342,30 @@
             this.UrlsListGroupBox.TabStop = false;
             this.UrlsListGroupBox.Text = "Список адресов для конвертирования";
             // 
+            // ConvertAllCheckBox
+            // 
+            this.ConvertAllCheckBox.AutoSize = true;
+            this.ConvertAllCheckBox.Checked = true;
+            this.ConvertAllCheckBox.CheckState = System.Windows.Forms.CheckState.Checked;
+            this.ConvertAllCheckBox.Location = new System.Drawing.Point(399, 136);
+            this.ConvertAllCheckBox.Name = "ConvertAllCheckBox";
+            this.ConvertAllCheckBox.Size = new System.Drawing.Size(73, 17);
+            this.ConvertAllCheckBox.TabIndex = 33;
+            this.ConvertAllCheckBox.Text = "Для всех";
+            this.ConvertAllCheckBox.UseVisualStyleBackColor = true;
+            // 
+            // GetTitleFromFileUrlsСheckBox
+            // 
+            this.GetTitleFromFileUrlsСheckBox.AutoSize = true;
+            this.GetTitleFromFileUrlsСheckBox.Checked = true;
+            this.GetTitleFromFileUrlsСheckBox.CheckState = System.Windows.Forms.CheckState.Checked;
+            this.GetTitleFromFileUrlsСheckBox.Location = new System.Drawing.Point(6, 212);
+            this.GetTitleFromFileUrlsСheckBox.Name = "GetTitleFromFileUrlsСheckBox";
+            this.GetTitleFromFileUrlsСheckBox.Size = new System.Drawing.Size(459, 17);
+            this.GetTitleFromFileUrlsСheckBox.TabIndex = 32;
+            this.GetTitleFromFileUrlsСheckBox.Text = "Получить имя выходного файла из заголовка страницы при добавлении url из файла";
+            this.GetTitleFromFileUrlsСheckBox.UseVisualStyleBackColor = true;
+            // 
             // GetTitleFromUrlСheckBox
             // 
             this.GetTitleFromUrlСheckBox.AutoSize = true;
@@ -383,6 +408,7 @@
             // 
             // groupBox1
             // 
+            this.groupBox1.Controls.Add(this.GetImmediatelyTitleFromUrlСheckBox);
             this.groupBox1.Controls.Add(this.OpenPdfFileCheckBox);
             this.groupBox1.Controls.Add(this.DefaultOutputPathTextBox);
             this.groupBox1.Controls.Add(this.ConvertImmediatelyButton);
@@ -414,29 +440,17 @@
             this.ClearStatusRichTextBoxButton.UseVisualStyleBackColor = true;
             this.ClearStatusRichTextBoxButton.Click += new System.EventHandler(this.ClearStatusRichTextBoxButton_Click);
             // 
-            // GetTitleFromFileUrlsСheckBox
+            // GetImmediatelyTitleFromUrlСheckBox
             // 
-            this.GetTitleFromFileUrlsСheckBox.AutoSize = true;
-            this.GetTitleFromFileUrlsСheckBox.Checked = true;
-            this.GetTitleFromFileUrlsСheckBox.CheckState = System.Windows.Forms.CheckState.Checked;
-            this.GetTitleFromFileUrlsСheckBox.Location = new System.Drawing.Point(6, 212);
-            this.GetTitleFromFileUrlsСheckBox.Name = "GetTitleFromFileUrlsСheckBox";
-            this.GetTitleFromFileUrlsСheckBox.Size = new System.Drawing.Size(459, 17);
-            this.GetTitleFromFileUrlsСheckBox.TabIndex = 32;
-            this.GetTitleFromFileUrlsСheckBox.Text = "Получить имя выходного файла из заголовка страницы при добавлении url из файла";
-            this.GetTitleFromFileUrlsСheckBox.UseVisualStyleBackColor = true;
-            // 
-            // ConvertAllCheckBox
-            // 
-            this.ConvertAllCheckBox.AutoSize = true;
-            this.ConvertAllCheckBox.Checked = true;
-            this.ConvertAllCheckBox.CheckState = System.Windows.Forms.CheckState.Checked;
-            this.ConvertAllCheckBox.Location = new System.Drawing.Point(399, 136);
-            this.ConvertAllCheckBox.Name = "ConvertAllCheckBox";
-            this.ConvertAllCheckBox.Size = new System.Drawing.Size(73, 17);
-            this.ConvertAllCheckBox.TabIndex = 33;
-            this.ConvertAllCheckBox.Text = "Для всех";
-            this.ConvertAllCheckBox.UseVisualStyleBackColor = true;
+            this.GetImmediatelyTitleFromUrlСheckBox.AutoSize = true;
+            this.GetImmediatelyTitleFromUrlСheckBox.Checked = true;
+            this.GetImmediatelyTitleFromUrlСheckBox.CheckState = System.Windows.Forms.CheckState.Checked;
+            this.GetImmediatelyTitleFromUrlСheckBox.Location = new System.Drawing.Point(269, 19);
+            this.GetImmediatelyTitleFromUrlСheckBox.Name = "GetImmediatelyTitleFromUrlСheckBox";
+            this.GetImmediatelyTitleFromUrlСheckBox.Size = new System.Drawing.Size(219, 17);
+            this.GetImmediatelyTitleFromUrlСheckBox.TabIndex = 22;
+            this.GetImmediatelyTitleFromUrlСheckBox.Text = "Получить имя из заголовка страницы";
+            this.GetImmediatelyTitleFromUrlСheckBox.UseVisualStyleBackColor = true;
             // 
             // MainForm
             // 
@@ -518,6 +532,7 @@
         private System.Windows.Forms.CheckBox GetTitleFromUrlСheckBox;
         private System.Windows.Forms.CheckBox GetTitleFromFileUrlsСheckBox;
         private System.Windows.Forms.CheckBox ConvertAllCheckBox;
+        private System.Windows.Forms.CheckBox GetImmediatelyTitleFromUrlСheckBox;
     }
 }
 
