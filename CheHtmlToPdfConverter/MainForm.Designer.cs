@@ -55,9 +55,16 @@
             this.AddRawButton = new System.Windows.Forms.Button();
             this.DeleteRawButton = new System.Windows.Forms.Button();
             this.UrlsListGroupBox = new System.Windows.Forms.GroupBox();
-            this.ConvertAllCheckBox = new System.Windows.Forms.CheckBox();
-            this.GetTitleFromFileUrlsСheckBox = new System.Windows.Forms.CheckBox();
+            this.groupBox2 = new System.Windows.Forms.GroupBox();
+            this.ClearResponseTimeoutTextBoxButton = new System.Windows.Forms.Button();
+            this.ResponseTimeoutTextBox = new System.Windows.Forms.TextBox();
+            this.label5 = new System.Windows.Forms.Label();
+            this.AddTitleToHeaderCheckBox = new System.Windows.Forms.CheckBox();
+            this.AddUrlToFooterCheckBox = new System.Windows.Forms.CheckBox();
+            this.NumerateOutputPdfFileNamesCheckBox = new System.Windows.Forms.CheckBox();
             this.GetTitleFromUrlСheckBox = new System.Windows.Forms.CheckBox();
+            this.GetTitleFromFileUrlsСheckBox = new System.Windows.Forms.CheckBox();
+            this.ConvertAllCheckBox = new System.Windows.Forms.CheckBox();
             this.NotOpenSelectedPdfFilesAfterConvertButton = new System.Windows.Forms.Button();
             this.OpenSelectedPdfFilesAfterConvertButton = new System.Windows.Forms.Button();
             this.ConvertUrlsListButton = new System.Windows.Forms.Button();
@@ -69,17 +76,12 @@
             this.OtherProgramToOpenPdfPathTextBox = new System.Windows.Forms.TextBox();
             this.ChangeOtherProgramToOpenPdfPathButton = new System.Windows.Forms.Button();
             this.ClearOtherProgramToOpenPdfPathButton = new System.Windows.Forms.Button();
-            this.groupBox2 = new System.Windows.Forms.GroupBox();
-            this.NumerateOutputPdfFileNamesCheckBox = new System.Windows.Forms.CheckBox();
-            this.AddUrlToFooterCheckBox = new System.Windows.Forms.CheckBox();
-            this.AddTitleToHeaderCheckBox = new System.Windows.Forms.CheckBox();
-            this.label5 = new System.Windows.Forms.Label();
-            this.ResponseTimeoutTextBox = new System.Windows.Forms.TextBox();
-            this.ClearResponseTimeoutTextBoxButton = new System.Windows.Forms.Button();
+            this.HideWkhtmltopdfWindowCheckBox = new System.Windows.Forms.CheckBox();
+            this.buttonAbout = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.UrlsToConvertDataGridView)).BeginInit();
             this.UrlsListGroupBox.SuspendLayout();
-            this.groupBox1.SuspendLayout();
             this.groupBox2.SuspendLayout();
+            this.groupBox1.SuspendLayout();
             this.SuspendLayout();
             // 
             // ConvertButton
@@ -353,17 +355,95 @@
             this.UrlsListGroupBox.TabStop = false;
             this.UrlsListGroupBox.Text = "Список адресов для конвертирования";
             // 
-            // ConvertAllCheckBox
+            // groupBox2
             // 
-            this.ConvertAllCheckBox.AutoSize = true;
-            this.ConvertAllCheckBox.Checked = true;
-            this.ConvertAllCheckBox.CheckState = System.Windows.Forms.CheckState.Checked;
-            this.ConvertAllCheckBox.Location = new System.Drawing.Point(400, 183);
-            this.ConvertAllCheckBox.Name = "ConvertAllCheckBox";
-            this.ConvertAllCheckBox.Size = new System.Drawing.Size(73, 17);
-            this.ConvertAllCheckBox.TabIndex = 33;
-            this.ConvertAllCheckBox.Text = "Для всех";
-            this.ConvertAllCheckBox.UseVisualStyleBackColor = true;
+            this.groupBox2.Controls.Add(this.buttonAbout);
+            this.groupBox2.Controls.Add(this.ClearResponseTimeoutTextBoxButton);
+            this.groupBox2.Controls.Add(this.ResponseTimeoutTextBox);
+            this.groupBox2.Controls.Add(this.label5);
+            this.groupBox2.Controls.Add(this.AddTitleToHeaderCheckBox);
+            this.groupBox2.Controls.Add(this.AddUrlToFooterCheckBox);
+            this.groupBox2.Controls.Add(this.NumerateOutputPdfFileNamesCheckBox);
+            this.groupBox2.Controls.Add(this.GetTitleFromUrlСheckBox);
+            this.groupBox2.Controls.Add(this.GetTitleFromFileUrlsСheckBox);
+            this.groupBox2.Location = new System.Drawing.Point(495, 19);
+            this.groupBox2.Name = "groupBox2";
+            this.groupBox2.Size = new System.Drawing.Size(374, 210);
+            this.groupBox2.TabIndex = 34;
+            this.groupBox2.TabStop = false;
+            this.groupBox2.Text = "Параметры конвертирования списка даресов";
+            // 
+            // ClearResponseTimeoutTextBoxButton
+            // 
+            this.ClearResponseTimeoutTextBoxButton.Location = new System.Drawing.Point(334, 82);
+            this.ClearResponseTimeoutTextBoxButton.Name = "ClearResponseTimeoutTextBoxButton";
+            this.ClearResponseTimeoutTextBoxButton.Size = new System.Drawing.Size(34, 23);
+            this.ClearResponseTimeoutTextBoxButton.TabIndex = 37;
+            this.ClearResponseTimeoutTextBoxButton.Text = "X";
+            this.ClearResponseTimeoutTextBoxButton.UseVisualStyleBackColor = true;
+            this.ClearResponseTimeoutTextBoxButton.Click += new System.EventHandler(this.ClearResponseTimeoutTextBoxButton_Click);
+            // 
+            // ResponseTimeoutTextBox
+            // 
+            this.ResponseTimeoutTextBox.Location = new System.Drawing.Point(245, 84);
+            this.ResponseTimeoutTextBox.Name = "ResponseTimeoutTextBox";
+            this.ResponseTimeoutTextBox.Size = new System.Drawing.Size(83, 20);
+            this.ResponseTimeoutTextBox.TabIndex = 36;
+            this.ResponseTimeoutTextBox.Text = "15000";
+            this.ResponseTimeoutTextBox.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.ResponseTimeoutTextBox_KeyPress);
+            // 
+            // label5
+            // 
+            this.label5.AutoSize = true;
+            this.label5.Location = new System.Drawing.Point(7, 87);
+            this.label5.Name = "label5";
+            this.label5.Size = new System.Drawing.Size(237, 13);
+            this.label5.TabIndex = 35;
+            this.label5.Text = "Таймаут при получении заголовка страницы:";
+            // 
+            // AddTitleToHeaderCheckBox
+            // 
+            this.AddTitleToHeaderCheckBox.AutoSize = true;
+            this.AddTitleToHeaderCheckBox.Checked = true;
+            this.AddTitleToHeaderCheckBox.CheckState = System.Windows.Forms.CheckState.Checked;
+            this.AddTitleToHeaderCheckBox.Location = new System.Drawing.Point(6, 187);
+            this.AddTitleToHeaderCheckBox.Name = "AddTitleToHeaderCheckBox";
+            this.AddTitleToHeaderCheckBox.Size = new System.Drawing.Size(177, 17);
+            this.AddTitleToHeaderCheckBox.TabIndex = 34;
+            this.AddTitleToHeaderCheckBox.Text = "Добавить заголовок в header";
+            this.AddTitleToHeaderCheckBox.UseVisualStyleBackColor = true;
+            // 
+            // AddUrlToFooterCheckBox
+            // 
+            this.AddUrlToFooterCheckBox.AutoSize = true;
+            this.AddUrlToFooterCheckBox.Checked = true;
+            this.AddUrlToFooterCheckBox.CheckState = System.Windows.Forms.CheckState.Checked;
+            this.AddUrlToFooterCheckBox.Location = new System.Drawing.Point(6, 164);
+            this.AddUrlToFooterCheckBox.Name = "AddUrlToFooterCheckBox";
+            this.AddUrlToFooterCheckBox.Size = new System.Drawing.Size(164, 17);
+            this.AddUrlToFooterCheckBox.TabIndex = 33;
+            this.AddUrlToFooterCheckBox.Text = "Добавить источник в footer";
+            this.AddUrlToFooterCheckBox.UseVisualStyleBackColor = true;
+            // 
+            // NumerateOutputPdfFileNamesCheckBox
+            // 
+            this.NumerateOutputPdfFileNamesCheckBox.AutoSize = true;
+            this.NumerateOutputPdfFileNamesCheckBox.Location = new System.Drawing.Point(7, 20);
+            this.NumerateOutputPdfFileNamesCheckBox.Name = "NumerateOutputPdfFileNamesCheckBox";
+            this.NumerateOutputPdfFileNamesCheckBox.Size = new System.Drawing.Size(217, 17);
+            this.NumerateOutputPdfFileNamesCheckBox.TabIndex = 0;
+            this.NumerateOutputPdfFileNamesCheckBox.Text = "Нумеровать имена выходных файлов";
+            this.NumerateOutputPdfFileNamesCheckBox.UseVisualStyleBackColor = true;
+            // 
+            // GetTitleFromUrlСheckBox
+            // 
+            this.GetTitleFromUrlСheckBox.AutoSize = true;
+            this.GetTitleFromUrlСheckBox.Location = new System.Drawing.Point(7, 43);
+            this.GetTitleFromUrlСheckBox.Name = "GetTitleFromUrlСheckBox";
+            this.GetTitleFromUrlСheckBox.Size = new System.Drawing.Size(356, 17);
+            this.GetTitleFromUrlСheckBox.TabIndex = 31;
+            this.GetTitleFromUrlСheckBox.Text = "Получить имя выходного файла из заголовка страницы (convert)";
+            this.GetTitleFromUrlСheckBox.UseVisualStyleBackColor = true;
             // 
             // GetTitleFromFileUrlsСheckBox
             // 
@@ -377,15 +457,17 @@
             this.GetTitleFromFileUrlsСheckBox.Text = "Получить имя выходного файла из заголовка страницы (add)";
             this.GetTitleFromFileUrlsСheckBox.UseVisualStyleBackColor = true;
             // 
-            // GetTitleFromUrlСheckBox
+            // ConvertAllCheckBox
             // 
-            this.GetTitleFromUrlСheckBox.AutoSize = true;
-            this.GetTitleFromUrlСheckBox.Location = new System.Drawing.Point(7, 43);
-            this.GetTitleFromUrlСheckBox.Name = "GetTitleFromUrlСheckBox";
-            this.GetTitleFromUrlСheckBox.Size = new System.Drawing.Size(356, 17);
-            this.GetTitleFromUrlСheckBox.TabIndex = 31;
-            this.GetTitleFromUrlСheckBox.Text = "Получить имя выходного файла из заголовка страницы (convert)";
-            this.GetTitleFromUrlСheckBox.UseVisualStyleBackColor = true;
+            this.ConvertAllCheckBox.AutoSize = true;
+            this.ConvertAllCheckBox.Checked = true;
+            this.ConvertAllCheckBox.CheckState = System.Windows.Forms.CheckState.Checked;
+            this.ConvertAllCheckBox.Location = new System.Drawing.Point(400, 183);
+            this.ConvertAllCheckBox.Name = "ConvertAllCheckBox";
+            this.ConvertAllCheckBox.Size = new System.Drawing.Size(73, 17);
+            this.ConvertAllCheckBox.TabIndex = 33;
+            this.ConvertAllCheckBox.Text = "Для всех";
+            this.ConvertAllCheckBox.UseVisualStyleBackColor = true;
             // 
             // NotOpenSelectedPdfFilesAfterConvertButton
             // 
@@ -466,7 +548,6 @@
             // UseOtherProgramToOpenPdfCheckBox
             // 
             this.UseOtherProgramToOpenPdfCheckBox.AutoSize = true;
-            this.UseOtherProgramToOpenPdfCheckBox.Enabled = false;
             this.UseOtherProgramToOpenPdfCheckBox.Location = new System.Drawing.Point(15, 522);
             this.UseOtherProgramToOpenPdfCheckBox.Name = "UseOtherProgramToOpenPdfCheckBox";
             this.UseOtherProgramToOpenPdfCheckBox.Size = new System.Drawing.Size(352, 17);
@@ -506,90 +587,32 @@
             this.ClearOtherProgramToOpenPdfPathButton.UseVisualStyleBackColor = true;
             this.ClearOtherProgramToOpenPdfPathButton.Click += new System.EventHandler(this.ClearOtherProgramToOpenPdfPathButton_Click);
             // 
-            // groupBox2
+            // HideWkhtmltopdfWindowCheckBox
             // 
-            this.groupBox2.Controls.Add(this.ClearResponseTimeoutTextBoxButton);
-            this.groupBox2.Controls.Add(this.ResponseTimeoutTextBox);
-            this.groupBox2.Controls.Add(this.label5);
-            this.groupBox2.Controls.Add(this.AddTitleToHeaderCheckBox);
-            this.groupBox2.Controls.Add(this.AddUrlToFooterCheckBox);
-            this.groupBox2.Controls.Add(this.NumerateOutputPdfFileNamesCheckBox);
-            this.groupBox2.Controls.Add(this.GetTitleFromUrlСheckBox);
-            this.groupBox2.Controls.Add(this.GetTitleFromFileUrlsСheckBox);
-            this.groupBox2.Location = new System.Drawing.Point(495, 19);
-            this.groupBox2.Name = "groupBox2";
-            this.groupBox2.Size = new System.Drawing.Size(374, 210);
-            this.groupBox2.TabIndex = 34;
-            this.groupBox2.TabStop = false;
-            this.groupBox2.Text = "Параметры конвертирования списка даресов";
+            this.HideWkhtmltopdfWindowCheckBox.AutoSize = true;
+            this.HideWkhtmltopdfWindowCheckBox.Location = new System.Drawing.Point(232, 169);
+            this.HideWkhtmltopdfWindowCheckBox.Name = "HideWkhtmltopdfWindowCheckBox";
+            this.HideWkhtmltopdfWindowCheckBox.Size = new System.Drawing.Size(249, 17);
+            this.HideWkhtmltopdfWindowCheckBox.TabIndex = 35;
+            this.HideWkhtmltopdfWindowCheckBox.Text = "Скрывать окно wkhtmltopfd при выполнении";
+            this.HideWkhtmltopdfWindowCheckBox.UseVisualStyleBackColor = true;
             // 
-            // NumerateOutputPdfFileNamesCheckBox
+            // buttonAbout
             // 
-            this.NumerateOutputPdfFileNamesCheckBox.AutoSize = true;
-            this.NumerateOutputPdfFileNamesCheckBox.Location = new System.Drawing.Point(7, 20);
-            this.NumerateOutputPdfFileNamesCheckBox.Name = "NumerateOutputPdfFileNamesCheckBox";
-            this.NumerateOutputPdfFileNamesCheckBox.Size = new System.Drawing.Size(217, 17);
-            this.NumerateOutputPdfFileNamesCheckBox.TabIndex = 0;
-            this.NumerateOutputPdfFileNamesCheckBox.Text = "Нумеровать имена выходных файлов";
-            this.NumerateOutputPdfFileNamesCheckBox.UseVisualStyleBackColor = true;
-            // 
-            // AddUrlToFooterCheckBox
-            // 
-            this.AddUrlToFooterCheckBox.AutoSize = true;
-            this.AddUrlToFooterCheckBox.Checked = true;
-            this.AddUrlToFooterCheckBox.CheckState = System.Windows.Forms.CheckState.Checked;
-            this.AddUrlToFooterCheckBox.Location = new System.Drawing.Point(6, 164);
-            this.AddUrlToFooterCheckBox.Name = "AddUrlToFooterCheckBox";
-            this.AddUrlToFooterCheckBox.Size = new System.Drawing.Size(164, 17);
-            this.AddUrlToFooterCheckBox.TabIndex = 33;
-            this.AddUrlToFooterCheckBox.Text = "Добавить источник в footer";
-            this.AddUrlToFooterCheckBox.UseVisualStyleBackColor = true;
-            // 
-            // AddTitleToHeaderCheckBox
-            // 
-            this.AddTitleToHeaderCheckBox.AutoSize = true;
-            this.AddTitleToHeaderCheckBox.Checked = true;
-            this.AddTitleToHeaderCheckBox.CheckState = System.Windows.Forms.CheckState.Checked;
-            this.AddTitleToHeaderCheckBox.Location = new System.Drawing.Point(6, 187);
-            this.AddTitleToHeaderCheckBox.Name = "AddTitleToHeaderCheckBox";
-            this.AddTitleToHeaderCheckBox.Size = new System.Drawing.Size(177, 17);
-            this.AddTitleToHeaderCheckBox.TabIndex = 34;
-            this.AddTitleToHeaderCheckBox.Text = "Добавить заголовок в header";
-            this.AddTitleToHeaderCheckBox.UseVisualStyleBackColor = true;
-            // 
-            // label5
-            // 
-            this.label5.AutoSize = true;
-            this.label5.Location = new System.Drawing.Point(7, 87);
-            this.label5.Name = "label5";
-            this.label5.Size = new System.Drawing.Size(237, 13);
-            this.label5.TabIndex = 35;
-            this.label5.Text = "Таймаут при получении заголовка страницы:";
-            // 
-            // ResponseTimeoutTextBox
-            // 
-            this.ResponseTimeoutTextBox.Location = new System.Drawing.Point(245, 84);
-            this.ResponseTimeoutTextBox.Name = "ResponseTimeoutTextBox";
-            this.ResponseTimeoutTextBox.Size = new System.Drawing.Size(83, 20);
-            this.ResponseTimeoutTextBox.TabIndex = 36;
-            this.ResponseTimeoutTextBox.Text = "15000";
-            this.ResponseTimeoutTextBox.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.ResponseTimeoutTextBox_KeyPress);
-            // 
-            // ClearResponseTimeoutTextBoxButton
-            // 
-            this.ClearResponseTimeoutTextBoxButton.Location = new System.Drawing.Point(334, 82);
-            this.ClearResponseTimeoutTextBoxButton.Name = "ClearResponseTimeoutTextBoxButton";
-            this.ClearResponseTimeoutTextBoxButton.Size = new System.Drawing.Size(34, 23);
-            this.ClearResponseTimeoutTextBoxButton.TabIndex = 37;
-            this.ClearResponseTimeoutTextBoxButton.Text = "X";
-            this.ClearResponseTimeoutTextBoxButton.UseVisualStyleBackColor = true;
-            this.ClearResponseTimeoutTextBoxButton.Click += new System.EventHandler(this.ClearResponseTimeoutTextBoxButton_Click);
+            this.buttonAbout.Location = new System.Drawing.Point(204, 146);
+            this.buttonAbout.Name = "buttonAbout";
+            this.buttonAbout.Size = new System.Drawing.Size(149, 23);
+            this.buttonAbout.TabIndex = 38;
+            this.buttonAbout.Text = "О программе";
+            this.buttonAbout.UseVisualStyleBackColor = true;
+            this.buttonAbout.Click += new System.EventHandler(this.buttonAbout_Click);
             // 
             // MainForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(905, 573);
+            this.Controls.Add(this.HideWkhtmltopdfWindowCheckBox);
             this.Controls.Add(this.ClearOtherProgramToOpenPdfPathButton);
             this.Controls.Add(this.OtherProgramToOpenPdfPathTextBox);
             this.Controls.Add(this.ChangeOtherProgramToOpenPdfPathButton);
@@ -625,10 +648,10 @@
             ((System.ComponentModel.ISupportInitialize)(this.UrlsToConvertDataGridView)).EndInit();
             this.UrlsListGroupBox.ResumeLayout(false);
             this.UrlsListGroupBox.PerformLayout();
-            this.groupBox1.ResumeLayout(false);
-            this.groupBox1.PerformLayout();
             this.groupBox2.ResumeLayout(false);
             this.groupBox2.PerformLayout();
+            this.groupBox1.ResumeLayout(false);
+            this.groupBox1.PerformLayout();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -683,6 +706,8 @@
         private System.Windows.Forms.Button ClearResponseTimeoutTextBoxButton;
         private System.Windows.Forms.TextBox ResponseTimeoutTextBox;
         private System.Windows.Forms.Label label5;
+        private System.Windows.Forms.CheckBox HideWkhtmltopdfWindowCheckBox;
+        private System.Windows.Forms.Button buttonAbout;
     }
 }
 

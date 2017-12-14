@@ -51,3 +51,4 @@ e:\Work\Git\CheHtmlToPdfConverter\chehtmltopdfconverter\CheHtmlToPdfConverter\ob
 e:\Work\Git\CheHtmlToPdfConverter\chehtmltopdfconverter\CheHtmlToPdfConverter\obj\Release\CheHtmlToPdfConverter.MainForm.resources
 e:\Work\Git\CheHtmlToPdfConverter\chehtmltopdfconverter\CheHtmlToPdfConverter\obj\Release\CheHtmlToPdfConverter.Properties.Resources.resources
 e:\Work\Git\CheHtmlToPdfConverter\chehtmltopdfconverter\CheHtmlToPdfConverter\obj\Release\CheHtmlToPdfConverter.csproj.GenerateResource.Cache
+e:\Work\Git\CheHtmlToPdfConverter\chehtmltopdfconverter\CheHtmlToPdfConverter\obj\Release\CheHtmlToPdfConverter.csproj.CoreCompileInputs.cache

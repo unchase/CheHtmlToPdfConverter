@@ -30,7 +30,9 @@ namespace CheHtmlToPdfConverter
             InitializeComponent();
 
 
-            //Process.Start("c:\\Program Files\\priPrinter\\priPrinter.exe", "e:\\26\\1.pdf");
+
+
+            //Process.Start(@"c:\Program Files\priPrinter\priPrinter.exe", @"e:\26\1.pdf");
 
 
             UrlsToConvert = new BindingList<UrlToConvert>();
@@ -175,7 +177,7 @@ namespace CheHtmlToPdfConverter
                 PdfConvert.ConvertHtmlToPdf(pdfDocument, new PdfOutput
                 {
                     OutputFilePath = outputFileFullPath
-                });
+                }, HideWkhtmltopdfWindowCheckBox.Checked);
 
                 //PdfConvert.ConvertHtmlToPdf(new PdfDocument 
                 //{ 
@@ -189,7 +191,10 @@ namespace CheHtmlToPdfConverter
 
                 if (open)
                 {
-                    Process.Start(outputFileFullPath);
+                    if (!UseOtherProgramToOpenPdfCheckBox.Checked)
+                        Process.Start(outputFileFullPath);
+                    else
+                        Process.Start(OtherProgramToOpenPdfPathTextBox.Text, outputFileFullPath);
                 }
             }
             catch (Exception ex)
@@ -320,6 +325,7 @@ namespace CheHtmlToPdfConverter
         private void AddRawButton_Click(object sender, EventArgs e)
         {
             UrlsToConvert.Add(new UrlToConvert("", false));
+            UrlsListGroupBox.Text = "Список адресов для конвертирования - " + UrlsToConvert.Count;
         }
 
         private void DeleteRawButton_Click(object sender, EventArgs e)
@@ -328,6 +334,7 @@ namespace CheHtmlToPdfConverter
             {
                 UrlsToConvert.Remove((UrlToConvert)selectedRow.DataBoundItem);
             }
+            UrlsListGroupBox.Text = "Список адресов для конвертирования - " + UrlsToConvert.Count;
         }
 
         private void ConvertUrlsListButton_Click(object sender, EventArgs e)
@@ -603,8 +610,6 @@ namespace CheHtmlToPdfConverter
                         {
                             if (GetTitleFromFileUrlsСheckBox.Checked)
                             {
-                                
-
                                 string title = ResponseTagHelper.GetWebPageTitle(l.Trim(), timeout);
                                 if (title != "")
                                     UrlsToConvert.Add(new UrlToConvert(l.Trim(), title, false));
@@ -613,6 +618,8 @@ namespace CheHtmlToPdfConverter
                             }
                             else
                                 UrlsToConvert.Add(new UrlToConvert(l.Trim(), false));
+
+                            UrlsListGroupBox.Text = "Список адресов для конвертирования - " + UrlsToConvert.Count;
                         }
                     }
                     counter++;
@@ -752,6 +759,11 @@ namespace CheHtmlToPdfConverter
             {
                 e.Handled = true;
             }
+        }
+
+        private void buttonAbout_Click(object sender, EventArgs e)
+        {
+            System.Windows.Forms.MessageBox.Show("Программа предназначена для конвертирования html-страниц в pdf-файлы с исходным форматированием.\nВсе права принадлежат Чеботову Николаю Валерьевичу (unchase).", "О программе CheHtmlToPdfConverter v1.0", MessageBoxButtons.OK, MessageBoxIcon.Information);
         }
     }
 }

@@ -90,12 +90,12 @@ namespace Codaxy.WkHtmlToPdf
             return Path.Combine(programFilesx86Path, @"wkhtmltopdf\bin\wkhtmltopdf.exe");
         }
 
-		public static void ConvertHtmlToPdf(PdfDocument document, PdfOutput output)
+		public static void ConvertHtmlToPdf(PdfDocument document, PdfOutput output, bool hideWindow)
 		{
-			ConvertHtmlToPdf(document, null, output);
+			ConvertHtmlToPdf(document, null, output, hideWindow);
 		}
 
-		public static void ConvertHtmlToPdf(PdfDocument document, PdfConvertEnvironment environment, PdfOutput woutput)
+		public static void ConvertHtmlToPdf(PdfDocument document, PdfConvertEnvironment environment, PdfOutput woutput, bool hideWindow)
         {
             if (document.Url == "-" && document.Html == null)
                 throw new PdfConvertException(
@@ -175,6 +175,8 @@ namespace Codaxy.WkHtmlToPdf
                     process.StartInfo.FileName = environment.WkHtmlToPdfPath;
                     process.StartInfo.Arguments = paramsBuilder.ToString();
                     process.StartInfo.UseShellExecute = false;
+                    if (hideWindow)
+                        process.StartInfo.CreateNoWindow = true;
                     process.StartInfo.RedirectStandardOutput = true;
                     process.StartInfo.RedirectStandardError = true;
                     process.StartInfo.RedirectStandardInput = true;
