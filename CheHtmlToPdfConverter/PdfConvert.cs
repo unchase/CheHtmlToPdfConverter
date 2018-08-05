@@ -1,51 +1,50 @@
 ﻿using System;
-using System.Diagnostics;
-using System.Text;
-using System.IO;
-using System.Web;
-using System.Threading;
 using System.Collections.Generic;
+using System.Diagnostics;
+using System.IO;
+using System.Text;
+using System.Threading;
 
-namespace Codaxy.WkHtmlToPdf
+namespace CheHtmlToPdfConverter
 {
     public class PdfConvertException : Exception
     {
-        public PdfConvertException(String msg) : base(msg) { }
+        public PdfConvertException(string msg) : base(msg) { }
     }
 
     public class PdfConvertTimeoutException : PdfConvertException
     {
-        public PdfConvertTimeoutException() : base("HTML to PDF conversion process has not finished in the given period.") { }
+        public PdfConvertTimeoutException() : base("Процесс конвертирования HTML в PDF не может быть окончен за заданное время.") { }
     }
 
 	public class PdfOutput
 	{
-		public String OutputFilePath { get; set; }
+		public string OutputFilePath { get; set; }
 		public Stream OutputStream { get; set; }
 		public Action<PdfDocument, byte[]> OutputCallback { get; set; }
 	}
 
 	public class PdfDocument
 	{
-		public String Url { get; set; }
-		public String Html { get; set; }
-		public String HeaderUrl { get; set; }
-		public String FooterUrl { get; set; }
-        public String HeaderLeft { get; set; }
-        public String HeaderCenter { get; set; }
-        public String HeaderRight { get; set; }
-        public String FooterLeft { get; set; }
-        public String FooterCenter { get; set; }
-        public String FooterRight { get; set; }
+		public string Url { get; set; }
+		public string Html { get; set; }
+		public string HeaderUrl { get; set; }
+		public string FooterUrl { get; set; }
+        public string HeaderLeft { get; set; }
+        public string HeaderCenter { get; set; }
+        public string HeaderRight { get; set; }
+        public string FooterLeft { get; set; }
+        public string FooterCenter { get; set; }
+        public string FooterRight { get; set; }
 		public object State { get; set; }
-        public Dictionary<String, String> Cookies { get; set; }
-        public Dictionary<String, String> ExtraParams { get; set; }
+        public Dictionary<string, string> Cookies { get; set; }
+        public Dictionary<string, string> ExtraParams { get; set; }
     }
 
 	public class PdfConvertEnvironment
 	{
-		public String TempFolderPath { get; set; }
-		public String WkHtmlToPdfPath { get; set; }
+		public string TempFolderPath { get; set; }
+		public string WkHtmlToPdfPath { get; set; }
 		public int Timeout { get; set; }
 		public bool Debug { get; set; }
 	}
@@ -71,14 +70,14 @@ namespace Codaxy.WkHtmlToPdf
 
         private static string GetWkhtmlToPdfExeLocation()
         {
-            string programFilesPath = System.Environment.GetEnvironmentVariable("ProgramFiles");
-            string filePath = Path.Combine(programFilesPath, @"wkhtmltopdf\wkhtmltopdf.exe");
+            var programFilesPath = System.Environment.GetEnvironmentVariable("ProgramFiles");
+            var filePath = Path.Combine(programFilesPath ?? throw new InvalidOperationException(), @"wkhtmltopdf\wkhtmltopdf.exe");
 
             if (File.Exists(filePath))
                 return filePath;
 
-            string programFilesx86Path = System.Environment.GetEnvironmentVariable("ProgramFiles(x86)");
-            filePath = Path.Combine(programFilesx86Path, @"wkhtmltopdf\wkhtmltopdf.exe");
+            var programFilesx86Path = System.Environment.GetEnvironmentVariable("ProgramFiles(x86)");
+            filePath = Path.Combine(programFilesx86Path ?? throw new InvalidOperationException(), @"wkhtmltopdf\wkhtmltopdf.exe");
 
             if (File.Exists(filePath))
                 return filePath;
@@ -99,13 +98,13 @@ namespace Codaxy.WkHtmlToPdf
         {
             if (document.Url == "-" && document.Html == null)
                 throw new PdfConvertException(
-                    String.Format("You must supply a HTML string, if you have enterd the url: {0}", document.Url)
+                    string.Format("Вы должны указать HTML-строку, если указали url: {0}", document.Url)
                 );
 
 			if (environment == null)
 				environment = Environment;
 
-			String outputPdfFilePath;
+			string outputPdfFilePath;
 			bool delete;
 			if (woutput.OutputFilePath != null)
 			{
@@ -114,14 +113,14 @@ namespace Codaxy.WkHtmlToPdf
 			}
 			else
 			{
-				outputPdfFilePath = Path.Combine(environment.TempFolderPath, String.Format("{0}.pdf", Guid.NewGuid()));
+				outputPdfFilePath = Path.Combine(environment.TempFolderPath, string.Format("{0}.pdf", Guid.NewGuid()));
 				delete = true;
 			}
 
 			if (!File.Exists(environment.WkHtmlToPdfPath))
-				throw new PdfConvertException(String.Format("File '{0}' not found. Check if wkhtmltopdf application is installed.", environment.WkHtmlToPdfPath));
+				throw new PdfConvertException(string.Format("Файл '{0}' не найден. Проверьте, что wkhtmltopdf приложение установлено.", environment.WkHtmlToPdfPath));
             
-            StringBuilder paramsBuilder = new StringBuilder();
+            var paramsBuilder = new StringBuilder();
             paramsBuilder.Append("--page-size A4 ");
             
 			if (!string.IsNullOrEmpty(document.HeaderUrl))
@@ -167,10 +166,10 @@ namespace Codaxy.WkHtmlToPdf
             
             try
             {
-                StringBuilder output = new StringBuilder();
-                StringBuilder error = new StringBuilder();
+                var output = new StringBuilder();
+                var error = new StringBuilder();
 
-                using (Process process = new Process())
+                using (var process = new Process())
                 {
                     process.StartInfo.FileName = environment.WkHtmlToPdfPath;
                     process.StartInfo.Arguments = paramsBuilder.ToString();
@@ -181,8 +180,8 @@ namespace Codaxy.WkHtmlToPdf
                     process.StartInfo.RedirectStandardError = true;
                     process.StartInfo.RedirectStandardInput = true;
 
-                    using (AutoResetEvent outputWaitHandle = new AutoResetEvent(false))
-                    using (AutoResetEvent errorWaitHandle = new AutoResetEvent(false))
+                    using (var outputWaitHandle = new AutoResetEvent(false))
+                    using (var errorWaitHandle = new AutoResetEvent(false))
                     {
                         DataReceivedEventHandler outputHandler = (sender, e) =>
                         {
@@ -222,7 +221,7 @@ namespace Codaxy.WkHtmlToPdf
                             {
                                 using (var stream = process.StandardInput)
                                 {
-                                    byte[] buffer = Encoding.UTF8.GetBytes(document.Html);
+                                    var buffer = Encoding.UTF8.GetBytes(document.Html);
                                     stream.BaseStream.Write(buffer, 0, buffer.Length);
                                     stream.WriteLine();
                                 }
@@ -232,7 +231,7 @@ namespace Codaxy.WkHtmlToPdf
                             {
                                 if (process.ExitCode != 0 && !File.Exists(outputPdfFilePath))
                                 {
-                                    throw new PdfConvertException(String.Format("Html to PDF conversion of '{0}' failed. Wkhtmltopdf output: \r\n{1}", document.Url, error));
+                                    throw new PdfConvertException(string.Format("Конвертация из Html в PDF '{0}' не была завершена. Вывод Wkhtmltopdf: \r\n{1}", document.Url, error));
                                 }
                             }
                             else
@@ -251,12 +250,11 @@ namespace Codaxy.WkHtmlToPdf
                     }
                 }
 
-
                 if (woutput.OutputStream != null)
                 {
                     using (Stream fs = new FileStream(outputPdfFilePath, FileMode.Open))
                     {
-                        byte[] buffer = new byte[32 * 1024];
+                        var buffer = new byte[32 * 1024];
                         int read;
 
                         while ((read = fs.Read(buffer, 0, buffer.Length)) > 0)
@@ -266,52 +264,16 @@ namespace Codaxy.WkHtmlToPdf
 
                 if (woutput.OutputCallback != null)
                 {
-                    byte[] pdfFileBytes = File.ReadAllBytes(outputPdfFilePath);
+                    var pdfFileBytes = File.ReadAllBytes(outputPdfFilePath);
                     woutput.OutputCallback(document, pdfFileBytes);
                 }
 
-            }            
+            }
             finally
             {
                 if (delete && File.Exists(outputPdfFilePath))
                     File.Delete(outputPdfFilePath);
             }
-        }        
+        }
     }
-
-    //class OSUtil
-    //{
-    //    public static string GetProgramFilesx86Path()
-    //    {
-    //        if (8 == IntPtr.Size || (!String.IsNullOrEmpty(Environment.GetEnvironmentVariable("PROCESSOR_ARCHITEW6432"))))
-    //        {
-    //            return Environment.GetEnvironmentVariable("ProgramFiles(x86)");
-    //        }
-    //        return Environment.GetEnvironmentVariable("ProgramFiles");
-    //    }
-    //}
-
-	//public static class HttpResponseExtensions
-	//{
-	//    public static void SendFileForDownload(this HttpResponse response, String filename, byte[] content)
-	//    {
-	//        SetFileDownloadHeaders(response, filename);
-	//        response.OutputStream.Write(content, 0, content.Length);
-	//        response.Flush();
-	//    }
-
-	//    public static void SendFileForDownload(this HttpResponse response, String filename)
-	//    {
-	//        SetFileDownloadHeaders(response, filename);
-	//        response.TransmitFile(filename);
-	//        response.Flush();
-	//    }
-
-	//    public static void SetFileDownloadHeaders(this HttpResponse response, String filename)
-	//    {
-	//        FileInfo fi = new FileInfo(filename);
-	//        response.ContentType = "application/force-download";
-	//        response.AddHeader("Content-Disposition", "attachment; filename=\"" + fi.Name + "\"");
-	//    }
-	//}
 }

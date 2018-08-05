@@ -1,16 +1,11 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
 using System.Runtime.InteropServices;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace CheHtmlToPdfConverter.Helpers
 {
     public static class DefaultFoldersHelper
     {
-        private static string[] _knownFolderGuids = new string[]
-    {
+        private static string[] _knownFolderGuids = {
         "{56784854-C6CB-462B-8169-88E350ACB882}", // Contacts
         "{B4BFCC3A-DB2C-424C-B029-7FE99A87C641}", // Desktop
         "{FDD39AD0-238F-46AF-ADB4-6C85480369C7}", // Documents
@@ -55,9 +50,8 @@ namespace CheHtmlToPdfConverter.Helpers
         private static string GetPath(KnownFolder knownFolder, KnownFolderFlags flags,
             bool defaultUser)
         {
-            IntPtr outPath;
-            int result = SHGetKnownFolderPath(new Guid(_knownFolderGuids[(int)knownFolder]),
-                (uint)flags, new IntPtr(defaultUser ? -1 : 0), out outPath);
+            var result = SHGetKnownFolderPath(new Guid(_knownFolderGuids[(int)knownFolder]),
+                (uint)flags, new IntPtr(defaultUser ? -1 : 0), out var outPath);
             if (result >= 0)
             {
                 return Marshal.PtrToStringUni(outPath);

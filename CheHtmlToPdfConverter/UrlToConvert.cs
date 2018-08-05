@@ -1,12 +1,5 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.ComponentModel;
-using System.ComponentModel.DataAnnotations;
-using System.IO;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using CheHtmlToPdfConverter.Helpers;
 
 namespace CheHtmlToPdfConverter
 {
@@ -27,12 +20,14 @@ namespace CheHtmlToPdfConverter
                 DateTime.Now.Second + "(" + Guid.NewGuid() + ")";
             Open = false;
         }
+
         public UrlToConvert(string url, string name)
         {
             Url = url;
             Name = name;
             Open = false;
         }
+
         public UrlToConvert(string url, bool open)
         {
             Url = url;
@@ -41,6 +36,7 @@ namespace CheHtmlToPdfConverter
                 DateTime.Now.Second + "(" + Guid.NewGuid() + ")";
             Open = open;
         }
+
         public UrlToConvert(string url, string name, bool open)
         {
             Url = url;
