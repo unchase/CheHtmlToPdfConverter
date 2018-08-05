@@ -47,7 +47,6 @@ e:\Work\Git\CheHtmlToPdfConverter\chehtmltopdfconverter\CheHtmlToPdfConverter\bi
 e:\Work\Git\CheHtmlToPdfConverter\chehtmltopdfconverter\CheHtmlToPdfConverter\bin\Release\wkhtmltopdf\x86\wkhtmltox.dll
 e:\Work\Git\CheHtmlToPdfConverter\chehtmltopdfconverter\CheHtmlToPdfConverter\bin\Release\CheHtmlToPdfConverter.exe
 e:\Work\Git\CheHtmlToPdfConverter\chehtmltopdfconverter\CheHtmlToPdfConverter\bin\Release\CheHtmlToPdfConverter.pdb
-e:\Work\Git\CheHtmlToPdfConverter\chehtmltopdfconverter\CheHtmlToPdfConverter\obj\Release\CheHtmlToPdfConverter.csprojResolveAssemblyReference.cache
 e:\Work\Git\CheHtmlToPdfConverter\chehtmltopdfconverter\CheHtmlToPdfConverter\obj\Release\CheHtmlToPdfConverter.MainForm.resources
 e:\Work\Git\CheHtmlToPdfConverter\chehtmltopdfconverter\CheHtmlToPdfConverter\obj\Release\CheHtmlToPdfConverter.Properties.Resources.resources
 e:\Work\Git\CheHtmlToPdfConverter\chehtmltopdfconverter\CheHtmlToPdfConverter\obj\Release\CheHtmlToPdfConverter.csproj.GenerateResource.Cache

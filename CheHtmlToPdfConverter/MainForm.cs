@@ -679,7 +679,7 @@ namespace CheHtmlToPdfConverter
 
         private void buttonAbout_Click(object sender, EventArgs e)
         {
-            MessageBox.Show("Программа предназначена для конвертирования html-страниц в pdf-файлы с исходным форматированием.\nРазработано 'unchase'.", "О программе CheHtmlToPdfConverter v1.0", MessageBoxButtons.OK, MessageBoxIcon.Information);
+            MessageBox.Show("Программа предназначена для конвертирования html-страниц в pdf-файлы с исходным форматированием.\nРазработано 'unchase' (https://github.com/unchase).", "О программе CheHtmlToPdfConverter v1.0", MessageBoxButtons.OK, MessageBoxIcon.Information);
         }
     }
 }

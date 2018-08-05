@@ -33,8 +33,8 @@ e:\Work\Git\CheHtmlToPdfConverter\chehtmltopdfconverter\CheHtmlToPdfConverter\bi
 e:\Work\Git\CheHtmlToPdfConverter\chehtmltopdfconverter\CheHtmlToPdfConverter\bin\Debug\wkhtmltopdf\x86\wkhtmltox.dll
 e:\Work\Git\CheHtmlToPdfConverter\chehtmltopdfconverter\CheHtmlToPdfConverter\bin\Debug\CheHtmlToPdfConverter.exe
 e:\Work\Git\CheHtmlToPdfConverter\chehtmltopdfconverter\CheHtmlToPdfConverter\bin\Debug\CheHtmlToPdfConverter.pdb
-e:\Work\Git\CheHtmlToPdfConverter\chehtmltopdfconverter\CheHtmlToPdfConverter\obj\Debug\CheHtmlToPdfConverter.csprojResolveAssemblyReference.cache
 e:\Work\Git\CheHtmlToPdfConverter\chehtmltopdfconverter\CheHtmlToPdfConverter\obj\Debug\CheHtmlToPdfConverter.MainForm.resources
 e:\Work\Git\CheHtmlToPdfConverter\chehtmltopdfconverter\CheHtmlToPdfConverter\obj\Debug\CheHtmlToPdfConverter.Properties.Resources.resources
 e:\Work\Git\CheHtmlToPdfConverter\chehtmltopdfconverter\CheHtmlToPdfConverter\obj\Debug\CheHtmlToPdfConverter.csproj.GenerateResource.Cache
 e:\Work\Git\CheHtmlToPdfConverter\chehtmltopdfconverter\CheHtmlToPdfConverter\obj\Debug\CheHtmlToPdfConverter.csproj.CoreCompileInputs.cache
+e:\Work\Git\CheHtmlToPdfConverter\chehtmltopdfconverter\CheHtmlToPdfConverter\obj\Debug\CheHtmlToPdfConverter.csprojAssemblyReference.cache
